@@ -1,0 +1,15 @@
+Usage:
+	- Put these files somewhere in your Unity3D project
+	- Modify the url of the socket in "Example.cs"
+	- Append Example.cs to a GameObject in Unity editor
+	- ...
+	- Currently it messages to just contain "red" "green" or "blue",
+	  changing the color of an object "cube". (define the object by
+	  drag'n'dropping it into the field "cube" in the inspector).
+	  
+Disclaimer:
+	- Does not support secure connections. Also the handshake doesn't
+	  work yet.
+	- Frames the data like this: 0x00~m~[datalen]~m~[data]0xff ...
+	  and expects incomming data to be framed like this, as it is
+	  default on socket.io-node)
