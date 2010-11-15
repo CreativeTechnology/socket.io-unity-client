@@ -108,7 +108,6 @@ public class SocketIoClientConnection {
 				byte[] msg = Encoding.UTF8.GetBytes(data);
 				byte[] length = Encoding.UTF8.GetBytes(msg.Length+"");
 				stream.WriteByte(0x00);
-				
 				stream.WriteByte(0x7e); // ~
 				stream.WriteByte(0x6d); // m
 				stream.WriteByte(0x7e); // ~
