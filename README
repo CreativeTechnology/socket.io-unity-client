@@ -1,60 +1,10 @@
 Usage:
 	- Put these files somewhere in your Unity3D project
-	- Modify the url of the socket in "Example.cs"
+	- Set host and port of socket in "Example.cs"
 	- Append Example.cs to a GameObject in Unity editor
-	- ...
-	- Currently it expects messages to just contain "red" "green" or "blue",
-	  changing the color of an object "cube" accordingly. (define the object
-	  by drag'n'dropping it into the field "cube" in the inspector).
-	  
+	- Connects to the socket.io socket just as any other
+	  socket.io client. Uses the WebSocket transport.
+
 Disclaimer:
 	- Does not support secure connections. Also the handshake doesn't
 	  work yet.
-	- Frames the data like this: 0x00~m~[datalen]~m~[data]0xff ...
-	  and expects incomming data to be framed like this, as it is
-	  default on socket.io-node)
-	- Haven't tested json yet
-
-Socket.io-part:
-	var io = require('socket.io');
-	var server = io.listen(app); // express.js
-
-	server.on('connection', function(client) {
-	  client.on('message', function (msg){
-		server.broadcast(msg); // Send back to all clients
-	  });
-	  client.on('disconnect', function(client){});
-	});
-
-
-Document served:
-	<!DOCTYPE html>
-	<html lang="en">
-		<head>
-			<title>Hello World</title>
-			<link href="/style.css" media="screen" rel="stylesheet" type="text/css">
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-			<script src="[url]:5000/socket.io/socket.io.js">
-			</script>
-			<script type="text/javascript"> 
-				var socket = new io.Socket('[url]');
-				$(document).ready(function() {
-				  socket.connect();
-				  socket.on('connect', function(){});
-				  socket.on('message', function(msg){
-					if (msg == 'red' ||msg == 'green' ||msg == 'blue') {
-					  $('#box').css('background',msg);
-					}
-				  });
-				  socket.on('disconnect', function(){});
-				});
-			</script>
-		</head>
-		<body>
-			<div id="box" style="background:white;width:80px;height:80px;margin:50px auto 0 auto; text-align:center;">
-				<button onclick="socket.send(&quot;red&quot;)" style="color:red;">red</button>
-				<button onclick="socket.send(&quot;green&quot;)" style="color:green;">green</button>
-				<button onclick="socket.send(&quot;blue&quot;)" style="color:blue;">blue</button>
-			</div>
-		</body>
-	</html>
