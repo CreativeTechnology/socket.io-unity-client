@@ -24,9 +24,27 @@ public class SocketIoClientReceiver {
 			try {
 				byte b = (byte)SocketIoClient.stream.ReadByte();
 				if (b == 0x00) {
+					//"~m~XXXX~m~"
+					b = (byte)SocketIoClient.stream.ReadByte(); // ~
+					b = (byte)SocketIoClient.stream.ReadByte(); // m
+					b = (byte)SocketIoClient.stream.ReadByte(); // ~
+					b = (byte)SocketIoClient.stream.ReadByte(); // X
+					List<char> bytes = new List<char>();
+					while (true) {
+						if (b==0x7e) break;
+						else {
+							bytes.Add((char)b);
+							b = (byte)SocketIoClient.stream.ReadByte();
+						}
+					}
+					b = (byte)SocketIoClient.stream.ReadByte(); // m
+					b = (byte)SocketIoClient.stream.ReadByte(); // ~
+					string number = "";
+					foreach (char c in bytes) {
+						number += c;
+					}
+					//eventHandler.Log("Lenght: "+number);
 					frameStart = true;
-					byte[] crapbytes = new byte[7];
-					SocketIoClient.stream.Read(crapbytes,0,7);
 				} else if (b == 0xff && frameStart == true) {
 					frameStart = false;
 					string msg = System.Text.Encoding.UTF8.GetString(messageBytes.ToArray());
@@ -38,7 +56,6 @@ public class SocketIoClientReceiver {
 						b = (byte)SocketIoClient.stream.ReadByte();
 						if (b==(byte)'h'){
 							b = (byte)SocketIoClient.stream.ReadByte(); // tilde
-							
 							b = (byte)SocketIoClient.stream.ReadByte();
 							List<char> bytes = new List<char>();
 							while (true) {
@@ -55,7 +72,9 @@ public class SocketIoClientReceiver {
 							SocketIoClient.send("~h~"+number);
 						}
 						frameStart = false;
-					} else messageBytes.Add(b);
+					} else {
+						messageBytes.Add(b);
+					}
 				} else if ((int)b == -1) {
 					handleError();
 				}

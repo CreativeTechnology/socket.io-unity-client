@@ -2,17 +2,20 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+//using LitJson; /* For json use litjson.sourceforge.net */
 
 // Inherit from SocketIoClient Class
-public class Example : SocketIoClient {
+public class Socket : SocketIoClient {
 	
-	public GameObject cube;
+	public string host = "localhost";
+	public int port = 5000;
 	
 	void Awake() {
+		// For Webplayer sandbox:
+		Security.PrefetchSocketPolicy(host, port);
 		// Setup Socket Connection
-		SetupClient("ws://[url]:5000/socket.io/websocket");
+		SetupClient("ws://"+host+":"+port+"/socket.io/websocket");
 	}
-	
 	
 	void Start() {
 		// Connect client and start up read thread
@@ -22,17 +25,11 @@ public class Example : SocketIoClient {
 	public void Update() {
 		// Calls "HandleMessage" if a message was in queue
 		ProcessQueue();
-		cube.transform.RotateAround(Vector3.up, Time.deltaTime/5.0f);
 	}
 	
 	// overrides default "onMessage" behaviour:
 	public override void HandleMessage(string msg) {
-		switch(msg) {
-			case "red": 	cube.transform.renderer.material.color = Color.red;		break;
-			case "green": 	cube.transform.renderer.material.color = Color.green;	break;
-			case "blue": 	cube.transform.renderer.material.color = Color.blue;	break;
-			default:		print("Unknown: " + msg);								break;
-		}
+		print(msg);
+		//JsonData message = JsonMapper.ToObject(msg);
 	}
-
 }

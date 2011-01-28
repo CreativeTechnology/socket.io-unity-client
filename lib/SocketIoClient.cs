@@ -20,6 +20,10 @@ public class SocketIoClient : MonoBehaviour {
 		print("SocketIoClient: " + msg);
 	}
 	
+	public void Send(string msg) {
+		websocket.send(msg);
+	}
+	
 	public virtual  void OnOpen() {
 		print("SocketIoClient: [open]");
 	}

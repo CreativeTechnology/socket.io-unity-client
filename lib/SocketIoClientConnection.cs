@@ -164,6 +164,9 @@ public class SocketIoClientConnection {
 			}
 			
 			try {
+				stream.WriteByte(0x80);
+				stream.WriteByte(0x01);
+				stream.WriteByte(0x00);
 				stream.WriteByte(0x00);
 				stream.Flush();
 			}
