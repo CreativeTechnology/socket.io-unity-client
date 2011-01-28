@@ -8,3 +8,7 @@ Usage:
 Disclaimer:
 	- Does not support secure connections. Also the handshake doesn't
 	  work yet.
+
+Roadmap:
+	- Use events instead of interface implementation
+	- Fix handshakes
