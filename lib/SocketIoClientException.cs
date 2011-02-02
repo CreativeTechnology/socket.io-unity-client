@@ -7,6 +7,5 @@ public class SocketIoClientException : Exception {
 
 	public SocketIoClientException(string message) : base(message) {}
 	
-	
 	public SocketIoClientException(string message, Exception t) : base(message, t) {}
 }

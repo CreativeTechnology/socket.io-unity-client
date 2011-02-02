@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-
 public class SocketIoClient : MonoBehaviour {
 	
 	[HideInInspector]

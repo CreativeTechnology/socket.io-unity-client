@@ -1,11 +1,3 @@
-/*
-import java.net.URI;
-import java.nio.ByteBuffer;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.HashMap;
-*/
 using System.Collections;
 using System;
 using System.Collections.Generic;
