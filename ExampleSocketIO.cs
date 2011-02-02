@@ -5,7 +5,7 @@ using System;
 //using LitJson; /* For json use litjson.sourceforge.net */
 
 // Inherit from SocketIoClient Class
-public class Socket : SocketIoClient {
+public class ExampleSocketIO : SocketIoClient {
 	
 	public string host = "localhost";
 	public int port = 5000;
