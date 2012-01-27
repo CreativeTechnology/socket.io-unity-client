@@ -1,3 +1,6 @@
+IMPORTANT:
+I do not maintain this anymore. This client was written to be (barely) compatible with v0.6.x of socket.io, which is very outdated.
+
 Usage:
 	- Put these files somewhere in your Unity3D project
 	- Set host and port of socket in "Example.cs"
